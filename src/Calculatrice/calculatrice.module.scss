@@ -1,0 +1,30 @@
+.calculator {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.number {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.operators {
+  margin-top: 20px;
+  display: flex;
+  display: flex;
+  justify-content: center;
+}
+
+.operator {
+  margin: 10px;
+}
