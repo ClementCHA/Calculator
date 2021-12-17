@@ -15,9 +15,9 @@ const CalculatriceContainer = () => {
     { key: "+", value: "+" },
     { key: "-", value: "-" },
     { key: "clear", value: "CE" },
-    { key: "=", value: "=" },
     { key: "x", value: "x" },
     { key: ",", value: "," },
+    { key: "=", value: "=" },
   ];
 
   const myArrayOfNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -30,6 +30,49 @@ const CalculatriceContainer = () => {
     CLEAR: "clear",
     EGAL: "=",
     COMMA: ",",
+  };
+  const operateAgain = () => {
+    setExpression(null);
+    if (mathOperation === OPERATORVALUE.ADD) {
+      setExpression(
+        `${JSON.parse(firstOperator) + JSON.parse(secondOperator)}`
+      );
+
+      setFirstOperator(
+        `${JSON.parse(firstOperator) + JSON.parse(secondOperator)}`
+      );
+      setSecondOperator("");
+    }
+    if (mathOperation === OPERATORVALUE.DIVIDE) {
+      setExpression(
+        `${JSON.parse(firstOperator) / JSON.parse(secondOperator)}`
+      );
+
+      setFirstOperator(
+        `${JSON.parse(firstOperator) / JSON.parse(secondOperator)}`
+      );
+      setSecondOperator("");
+    }
+    if (mathOperation === OPERATORVALUE.MULTIPLY) {
+      setExpression(
+        `${JSON.parse(firstOperator) * JSON.parse(secondOperator)}`
+      );
+
+      setFirstOperator(
+        `${JSON.parse(firstOperator) * JSON.parse(secondOperator)}`
+      );
+      setSecondOperator("");
+    }
+    if (mathOperation === OPERATORVALUE.SUBSTRACTION) {
+      setExpression(
+        `${JSON.parse(firstOperator) - JSON.parse(secondOperator)}`
+      );
+
+      setFirstOperator(
+        `${JSON.parse(firstOperator) - JSON.parse(secondOperator)}`
+      );
+      setSecondOperator("");
+    }
   };
 
   const saveNumber = (e) => {
@@ -53,6 +96,7 @@ const CalculatriceContainer = () => {
         setSecondOperator("");
         setExpression("");
         setMathOperation("");
+        setIsDecimal(false);
         break;
       //! Substraction
       case OPERATORVALUE.SUBSTRACTION:
@@ -60,6 +104,9 @@ const CalculatriceContainer = () => {
         setNumber("");
         setExpression(number);
         setMathOperation(OPERATORVALUE.SUBSTRACTION);
+        if (mathOperation.length > 0) {
+          operateAgain();
+        }
         break;
       //! Divide
       case OPERATORVALUE.DIVIDE:
@@ -67,6 +114,9 @@ const CalculatriceContainer = () => {
         setNumber("");
         setExpression(number);
         setMathOperation(OPERATORVALUE.DIVIDE);
+        if (mathOperation.length > 0) {
+          operateAgain();
+        }
         break;
       //! Multiply
       case OPERATORVALUE.MULTIPLY:
@@ -74,12 +124,15 @@ const CalculatriceContainer = () => {
         setNumber("");
         setExpression(number);
         setMathOperation(OPERATORVALUE.MULTIPLY);
+        if (mathOperation.length > 0) {
+          operateAgain();
+        }
         break;
       //! Comma
       case OPERATORVALUE.COMMA:
         if (!isDecimal) {
           setIsDecimal(true);
-          setNumber(number.concat(","));
+          setNumber(number.concat("."));
         }
         break;
       //! Add
@@ -89,17 +142,7 @@ const CalculatriceContainer = () => {
         setExpression(number);
         setMathOperation(OPERATORVALUE.ADD);
         if (mathOperation.length > 0) {
-          setExpression(null);
-          if (mathOperation === OPERATORVALUE.ADD) {
-            setExpression(
-              `${parseInt(firstOperator, 10) + parseInt(secondOperator, 10)}`
-            );
-            setFirstOperator(
-              `${parseInt(firstOperator, 10) + parseInt(secondOperator, 10)}`
-            );
-            setSecondOperator("");
-            setMathOperation(OPERATORVALUE.ADD);
-          }
+          operateAgain();
         }
         break;
 
@@ -107,7 +150,7 @@ const CalculatriceContainer = () => {
       case OPERATORVALUE.EGAL:
         if (mathOperation === OPERATORVALUE.ADD) {
           setNumber(
-            `${parseInt(firstOperator, 10) + parseInt(secondOperator, 10)}`
+            `${JSON.parse(firstOperator) + JSON.parse(secondOperator)}`
           );
           setFirstOperator("");
           setMathOperation("");
@@ -116,7 +159,7 @@ const CalculatriceContainer = () => {
         }
         if (mathOperation === OPERATORVALUE.DIVIDE) {
           setNumber(
-            `${parseInt(firstOperator, 10) / parseInt(secondOperator, 10)}`
+            `${JSON.parse(firstOperator) / JSON.parse(secondOperator)}`
           );
           setFirstOperator("");
           setMathOperation("");
@@ -126,7 +169,7 @@ const CalculatriceContainer = () => {
 
         if (mathOperation === OPERATORVALUE.SUBSTRACTION) {
           setNumber(
-            `${parseInt(firstOperator, 10) - parseInt(secondOperator, 10)}`
+            `${JSON.parse(firstOperator) - JSON.parse(secondOperator)}`
           );
           setFirstOperator("");
           setMathOperation("");
@@ -136,7 +179,7 @@ const CalculatriceContainer = () => {
 
         if (mathOperation === OPERATORVALUE.SUBSTRACTION) {
           setNumber(
-            `${parseInt(firstOperator, 10) - parseInt(secondOperator, 10)}`
+            `${JSON.parse(firstOperator) - JSON.parse(secondOperator)}`
           );
           setFirstOperator("");
           setMathOperation("");
@@ -146,7 +189,7 @@ const CalculatriceContainer = () => {
 
         if (mathOperation === OPERATORVALUE.MULTIPLY) {
           setNumber(
-            `${parseInt(firstOperator, 10) * parseInt(secondOperator, 10)}`
+            `${JSON.parse(firstOperator) * JSON.parse(secondOperator)}`
           );
           setFirstOperator("");
           setMathOperation("");

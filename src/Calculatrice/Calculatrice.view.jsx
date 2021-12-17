@@ -10,44 +10,43 @@ const CalculatriceView = ({
   myArrayOfNumber,
   expression,
 }) => {
-  console.log(expression);
   return (
-    <>
+    <div className={styles.calculatorProject}>
+      <h1 className={styles.title}> My really original Calculator</h1>
       <div className={styles.calculator}>
-        <div>
-          {myArrayOfNumber.map((number) => {
+        <div className={styles.result}>{!expression ? number : expression}</div>
+        <div className={styles.operators}>
+          {myArrayOfOperator.map((operator) => {
             return (
-              <button
-                className={styles.number}
-                key={number}
-                onClick={saveNumber}
-                value={number}
-              >
-                {number}
-              </button>
-            );
-          })}
-          <div className={styles.operators}>
-            {myArrayOfOperator.map((operator) => {
-              return (
+              <div className={styles.buttonOperator}>
                 <button
-                  className={styles.operator}
                   key={operator.key}
                   value={operator.key}
                   onClick={operate}
+                  className={styles.buttonStyle}
                 >
                   {operator.value}
                 </button>
-              );
-            })}
-          </div>
-
-          <div className={styles.result}>
-            {!expression ? number : expression}
-          </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className={styles.numbers}>
+          {myArrayOfNumber.map((number) => (
+            <div className={styles.buttonOperator}>
+              <button
+                key={number}
+                onClick={saveNumber}
+                value={number}
+                className={styles.buttonStyle}
+              >
+                {number}
+              </button>
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
